@@ -1,7 +1,7 @@
 const credential = {
     host     : 'host',
     user     : 'user',
-    password : 'Ypassword',
+    password : 'password',
     database : 'database'
 }
 module.exports = credential;

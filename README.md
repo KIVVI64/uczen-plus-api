@@ -6,11 +6,14 @@ by: Rahul Gupta
 
 ## Run Locally
 
-In the project directory, install dependencies
+In *config* folder copy *credential-template.js* and create *credential.js* file with correct data.
+
+
+Install dependencies in the project directory
 
 `npm install`
 
-Start the server
+Then start the server
 
 `npm start` OR `nodemon start` OR `node server.js`
 
