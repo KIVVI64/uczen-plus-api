@@ -37,9 +37,11 @@ app.get('/', (req, res) => {
 // Require employee routes
 //const templateRoutes = require('./src/routes/template.routes')
 const teacherRoutes = require('./src/routes/teacher.routes')
+const pointRoutes = require('./src/routes/point.routes')
 
 // using as middleware
 app.use('/uczen-plus-api/v1/teacher', teacherRoutes)
+app.use('/uczen-plus-api/v1/point', pointRoutes)
 
 // listen for requests
 app.listen(port, () => {

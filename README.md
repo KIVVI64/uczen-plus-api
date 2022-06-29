@@ -20,9 +20,11 @@ Then start the server
 App is now running at [http://localhost:5000](http://localhost:5000) in the development mode.
 
 
-## Endpoints
+# Endpoints
 
 https://**kivvi.iqhs.pl/uczen-plus-api/v1**
+
+## Teachers
 
 | Method | Endpoint | Params | Description |
 | :----- | :------- | :----- | :---------- |
@@ -41,11 +43,21 @@ To add teacher pass Object in params
 }
 ```
 
-Successful response:
+## Points
+
+| Method | Endpoint | Params | Description |
+| :----- | :------- | :----- | :---------- |
+| GET | /point | /:user_id | Retrieve all user points |
+| POST | /point | / | Create a new points record |
+| PUT | /point | /:id | Update a point status |
+
+To add point pass Object in params
 ```json
 {
-    "error": false,
-    "message": "Data added successfully!",
-    "data": <id>
+    "user_id": <user_id>,
+    "amount": <number>,
+    "status": <await/approved/rejected>, // default 'await'
+    "table_index": <string>,
+    "table_id": <number>
 }
 ```
