@@ -17,6 +17,7 @@ function randomCode(length = 10) {
 //Tworzenie obiektu nauczyciela
 var Data = function (data) {
   this.ok = data.ok ? data.ok : 0; //domyslnie ukryty
+  this.checked = data.checked ? data.checked : 0; //domyslnie ukryty
   this.school_id = data.school_id;
   this.name_first = data.name_first;
   this.name_last = data.name_last;
@@ -71,8 +72,9 @@ Data.findAll = function (result) {
 };
 Data.update = function (id, data, result) {
   dbConn.query(
-    "UPDATE templates SET first_name=?,last_name=?,email=?,phone=?,organization=?,designation=?,salary=? WHERE id = ?",
+    "UPDATE templates SET checked=?, first_name=?,last_name=?,email=?,phone=?,organization=?,designation=?,salary=? WHERE id = ?",
     [
+      data.checked,
       data.first_name,
       data.last_name,
       data.email,

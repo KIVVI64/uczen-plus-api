@@ -24,6 +24,31 @@ App is now running at [http://localhost:5000](http://localhost:5000) in the deve
 
 https://**kivvi.iqhs.pl/uczen-plus-api/v1**
 
+## Schools
+
+| Method | Endpoint | Params | Description |
+| :----- | :------- | :----- | :---------- |
+| GET | /school | / | Retrieve all schools  |
+| GET | /school | /:id | Retrieve selected school |
+| POST | /school | / | Add new school |
+| PUT | /school | /:id | Update school data |
+
+To add/edit school pass Object in params
+```json
+{
+    "ok": <0/1>, //default: 0
+    "checked": <0/1>, //default: 0
+    "name_full": <string>,
+    "name_colloquial": <string>,
+    "type": <string>,
+    "address": <string>,
+    "woj": <string>,
+    "city": <string>,
+    "website": <string>,
+    "contact": <string>
+}
+```
+
 ## Teachers
 
 | Method | Endpoint | Params | Description |
@@ -37,6 +62,7 @@ To add teacher pass Object in params
 ```json
 {
     "ok": <0/1>, // default: 0
+    "checked": <0/1>, //default: 0
     "school_id": <number>,
     "name_first": <string>,
     "name_last": <string>
@@ -61,3 +87,5 @@ To add point pass Object in params
     "table_id": <number>
 }
 ```
+
+When adding records API return id in "data".
