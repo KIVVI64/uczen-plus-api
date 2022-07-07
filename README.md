@@ -69,6 +69,29 @@ To add teacher pass Object in params
 }
 ```
 
+## Teacher Facts
+
+| Method | Endpoint | Params | Description |
+| :----- | :------- | :----- | :---------- |
+| GET | /teacher_facts | /:id | Retrieve specific fact |
+| GET | /teacher_facts | /teacher/:teacher_id | Find facts by teacher id |
+| GET | /teacher_facts | /user/:user_id | Find facts by user id |
+| GET | /teacher_facts | /uid/:uid | Find fact history by uid |
+| POST | /teacher_facts | / | Add new fact to teacher |
+
+To add fact pass Object in params
+```json
+{
+    "ok": <0/1>, // default: 0
+    "checked": <0/1>, //default: 0
+    "uid": <number>, //default: generated
+    "teacher_id": <number>,
+    "table": <powiedzenie/ciekawostki/inne>,
+    "content": <string>,
+    "user_id": <number>
+}
+```
+
 ## Points
 
 | Method | Endpoint | Params | Description |

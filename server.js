@@ -34,14 +34,16 @@ app.get('/', (req, res) => {
   res.send("Udaje dobrze napisane API :)");
 });
 
-// Require employee routes
+// Require API routes
 //const templateRoutes = require('./src/routes/template.routes')
 const teacherRoutes = require('./src/routes/teacher.routes')
+const teacherFactsRoutes = require('./src/routes/teacher-facts.routes')
 const pointRoutes = require('./src/routes/point.routes')
 const schoolRoutes = require('./src/routes/school.routes')
 
 // using as middleware
 app.use('/uczen-plus-api/v1/teacher', teacherRoutes)
+app.use('/uczen-plus-api/v1/teacher_facts', teacherFactsRoutes)
 app.use('/uczen-plus-api/v1/point', pointRoutes)
 app.use('/uczen-plus-api/v1/school', schoolRoutes)
 
