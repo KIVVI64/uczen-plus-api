@@ -84,7 +84,7 @@ To add fact pass Object in params
 {
     "ok": <0/1>, // default: 0
     "checked": <0/1>, //default: 0
-    "uid": <number>, //default: generated
+    "uid": <string>, //default: generated
     "teacher_id": <number>,
     "table": <powiedzenie/ciekawostki/inne>,
     "content": <string>,

@@ -10,7 +10,7 @@ function randomCode(length = 10) {
     year = d.getFullYear(),
     hour = d.getHours(),
     minute = d.getMinutes();
-  let chars = "0123456789";
+  let chars = "qwertyupasdfghjkzxcvbnm";
 
   // Pick characers randomly
   let str = year + month + day + hour + minute + "";
@@ -32,6 +32,7 @@ var Data = function (data) {
 };
 Data.create = function (newEmp, result) {
   dbConn.query("INSERT INTO teacher_facts set ?", newEmp, function (err, res) {
+    //console.log(randomCode(4));
     if (err) {
       //console.log("error: ", err);
       result(err, null);
