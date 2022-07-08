@@ -1,37 +1,18 @@
 "user strict";
 var dbConn = require("../../config/db.config");
 
-//Generowanie kodu z daty
-function randomCode(length = 10) {
-  // Declare all characters
-  var d = new Date(),
-    month = "" + (d.getMonth() + 1),
-    day = "" + d.getDate(),
-    year = d.getFullYear(),
-    hour = d.getHours(),
-    minute = d.getMinutes();
-  let chars = "qwertyupasdfghjkzxcvbnm";
-
-  // Pick characers randomly
-  let str = year + month + day + hour + minute + "";
-  for (let i = 0; i < length; i++) {
-    str += chars.charAt(Math.floor(Math.random() * chars.length));
-  }
-  return str;
-}
 
 //Tworzenie obiektu faktów nauczyciela
 var Data = function (data) {
-  this.uid = data.uid ? data.uid : randomCode(4);
   this.ok = data.ok ? data.ok : 0; //domyslnie ukryty
   this.checked = data.checked ? data.checked : 0; //domyslnie ukryty
   this.teacher_id = data.teacher_id;
-  this.table = data.table;
-  this.content = data.content;
+  this.property = data.property;
+  this.value = data.value;
   this.user_id = data.user_id;
 };
 Data.create = function (newEmp, result) {
-  dbConn.query("INSERT INTO teacher_facts set ?", newEmp, function (err, res) {
+  dbConn.query("INSERT INTO teacher_info set ?", newEmp, function (err, res) {
     //console.log(randomCode(4));
     if (err) {
       //console.log("error: ", err);
@@ -43,7 +24,7 @@ Data.create = function (newEmp, result) {
   });
 };
 Data.findById = function (id, result) {
-  dbConn.query("Select * from teacher_facts where id = ? ", id, function (err, res) {
+  dbConn.query("Select * from teacher_info where id = ? ", id, function (err, res) {
     if (err) {
       //console.log("error: ", err);
       result(err, null);
@@ -54,7 +35,7 @@ Data.findById = function (id, result) {
 };
 Data.findByTeacherId = function (teacher_id, result) {
   dbConn.query(
-    "Select * from teacher_facts where teacher_id = ? ",
+    "Select * from teacher_info where teacher_id = ? ",
     teacher_id,
     function (err, res) {
       if (err) {
@@ -67,21 +48,8 @@ Data.findByTeacherId = function (teacher_id, result) {
 };
 Data.findByUserId = function (user_id, result) {
   dbConn.query(
-    "Select * from teacher_facts where user_id = ? ",
+    "Select * from teacher_info where user_id = ? ",
     user_id,
-    function (err, res) {
-      if (err) {
-        result(err, null);
-      } else {
-        result(null, res);
-      }
-    }
-  );
-};
-Data.findByUid = function (uid, result) {
-  dbConn.query(
-    "Select * from teacher_facts where uid = ? ",
-    uid,
     function (err, res) {
       if (err) {
         result(err, null);

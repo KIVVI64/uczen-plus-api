@@ -92,6 +92,27 @@ To add fact pass Object in params
 }
 ```
 
+## Teacher Info
+
+| Method | Endpoint | Params | Description |
+| :----- | :------- | :----- | :---------- |
+| GET | /teacher_info | /:id | Retrieve specific info |
+| GET | /teacher_info | /teacher/:teacher_id | Find all info by teacher id |
+| GET | /teacher_info | /user/:user_id | Find info added by user id |
+| POST | /teacher_info | / | Add new info to teacher |
+
+To add info pass Object in params
+```json
+{
+    "ok": <0/1>, // default: 0
+    "checked": <0/1>, //default: 0
+    "teacher_id": <number>,
+    "property": <string>,
+    "value": <string>,
+    "user_id": <number>
+}
+```
+
 ## Points
 
 | Method | Endpoint | Params | Description |

@@ -3,7 +3,7 @@ const router = express.Router();
 const teacherFactsController = require("../controllers/teacher-facts.controller");
 
 // Retrieve all templates
-router.get("/", teacherFactsController.findAll);
+//router.get("/", teacherFactsController.findAll);
 
 // Create a new template
 router.post("/", teacherFactsController.create);
