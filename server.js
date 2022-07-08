@@ -41,6 +41,7 @@ const teacherFactsRoutes = require('./src/routes/teacher-facts.routes')
 const teacherInfoRoutes = require('./src/routes/teacher-info.routes')
 const pointRoutes = require('./src/routes/point.routes')
 const schoolRoutes = require('./src/routes/school.routes')
+const userRoutes = require('./src/routes/user.routes')
 
 // using as middleware
 app.use('/uczen-plus-api/v1/teacher', teacherRoutes)
@@ -48,6 +49,7 @@ app.use('/uczen-plus-api/v1/teacher_facts', teacherFactsRoutes)
 app.use('/uczen-plus-api/v1/teacher_info', teacherInfoRoutes)
 app.use('/uczen-plus-api/v1/point', pointRoutes)
 app.use('/uczen-plus-api/v1/school', schoolRoutes)
+app.use('/uczen-plus-api/v1/user', userRoutes)
 
 // listen for requests
 app.listen(port, () => {

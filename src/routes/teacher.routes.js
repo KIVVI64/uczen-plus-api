@@ -1,23 +1,23 @@
 const express = require('express')
 const router = express.Router()
-const dataController = require('../controllers/teacher.controller');
+const teacherController = require('../controllers/teacher.controller');
 
 // Retrieve all teachers
-router.get('/', dataController.findAll);
+router.get('/', teacherController.findAll);
 
 // Create a new teacher
-router.post('/', dataController.create);
+router.post('/', teacherController.create);
 
 // Retrieve a basic info about teacher with id
-router.get('/:id', dataController.findById);
+router.get('/:id', teacherController.findById);
 
 // Retrieve a basic info about teacher with id
-router.get('/school/:school_id', dataController.findBySchoolId);
+router.get('/school/:school_id', teacherController.findBySchoolId);
 
 // Update a teacher with id
-//router.put('/:id', dataController.update);
+//router.put('/:id', teacherController.update);
 
 // Delete a teacher with id
-//router.delete('/:id', dataController.delete);
+router.delete('/:id', teacherController.delete);
 
 module.exports = router

@@ -24,6 +24,26 @@ App is now running at [http://localhost:5000](http://localhost:5000) in the deve
 
 https://**kivvi.iqhs.pl/uczen-plus-api/v1**
 
+## Users
+
+| Method | Endpoint | Params | Description |
+| :----- | :------- | :----- | :---------- |
+| GET | /user | / | Retrieve all users |
+| GET | /user | /:id | Retrieve selected user |
+| POST | /user | / | Create new user account |
+| PUT | /user | /:id | Update user |
+| DELETE | /user | /:id | Closer user account |
+
+To add user pass Object in params
+```json
+{
+    "firebase_uid": <text>,
+    "nick": <text>,
+    "email": <text>,
+    "type": <user/superuser/admin>, // default 'user'
+}
+```
+
 ## Schools
 
 | Method | Endpoint | Params | Description |
@@ -57,6 +77,7 @@ To add/edit school pass Object in params
 | GET | /teacher | /:id | Retrieve selected teacher |
 | GET | /teacher | /school/:school_id | Find teacher by school id |
 | POST | /teacher | / | Add new teacher |
+| DELETE | /teacher | /:id | Delete teacher account ;) |
 
 To add teacher pass Object in params
 ```json
@@ -124,7 +145,7 @@ To add info pass Object in params
 To add point pass Object in params
 ```json
 {
-    "user_id": <user_id>,
+    "user_id": <number>,
     "amount": <number>,
     "status": <await/approved/rejected>, // default 'await'
     "table_index": <string>,

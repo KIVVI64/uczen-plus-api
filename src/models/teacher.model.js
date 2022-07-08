@@ -22,11 +22,9 @@ var Data = function (data) {
   this.name_first = data.name_first;
   this.name_last = data.name_last;
   this.verification_code = randomCode();
-  //this.status         = data.status ? data.status : 1;
-  //this.updated_at     = new Date();
 };
 Data.create = function (newEmp, result) {
-  dbConn.query("INSERT INTO teacher set ?", newEmp, function (err, res) {
+  dbConn.query("INSERT INTO teacher SET ?", newEmp, function (err, res) {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -37,7 +35,7 @@ Data.create = function (newEmp, result) {
   });
 };
 Data.findById = function (id, result) {
-  dbConn.query("Select * from teacher where id = ? ", id, function (err, res) {
+  dbConn.query("SELECT * FROM teacher WHERE id = ? ", id, function (err, res) {
     if (err) {
       //console.log("error: ", err);
       result(err, null);
@@ -48,7 +46,7 @@ Data.findById = function (id, result) {
 };
 Data.findBySchoolId = function (school_id, result) {
   dbConn.query(
-    "Select * from teacher where school_id = ? ",
+    "SELECT * FROM teacher WHERE school_id = ? ",
     school_id,
     function (err, res) {
       if (err) {
@@ -60,7 +58,7 @@ Data.findBySchoolId = function (school_id, result) {
   );
 };
 Data.findAll = function (result) {
-  dbConn.query("Select * from teacher", function (err, res) {
+  dbConn.query("SELECT * FROM teacher", function (err, res) {
     if (err) {
       //console.log("error: ", err);
       result(null, err);
@@ -70,7 +68,7 @@ Data.findAll = function (result) {
     }
   });
 };
-Data.update = function (id, data, result) {
+/*Data.update = function (id, data, result) {
   dbConn.query(
     "UPDATE templates SET checked=?, first_name=?,last_name=?,email=?,phone=?,organization=?,designation=?,salary=? WHERE id = ?",
     [
@@ -93,9 +91,9 @@ Data.update = function (id, data, result) {
       }
     }
   );
-};
+};*/
 Data.delete = function (id, result) {
-  dbConn.query("DELETE FROM templates WHERE id = ?", [id], function (err, res) {
+  dbConn.query("UPDATE teacher SET ok=0, checked=1 WHERE id = ?", [id], function (err, res) {
     if (err) {
       //console.log("error: ", err);
       result(null, err);
