@@ -31,7 +31,7 @@ var Data = function (data) {
   this.user_id = data.user_id;
 };
 Data.create = function (newEmp, result) {
-  dbConn.query("INSERT INTO teacher_facts set ?", newEmp, function (err, res) {
+  dbConn.query("INSERT INTO teacher_facts SET ?", newEmp, function (err, res) {
     //console.log(randomCode(4));
     if (err) {
       //console.log("error: ", err);
@@ -43,7 +43,7 @@ Data.create = function (newEmp, result) {
   });
 };
 Data.findById = function (id, result) {
-  dbConn.query("Select * from teacher_facts where id = ? ", id, function (err, res) {
+  dbConn.query("SELECT * FROM teacher_facts WHERE id = ? ", id, function (err, res) {
     if (err) {
       //console.log("error: ", err);
       result(err, null);
@@ -54,7 +54,7 @@ Data.findById = function (id, result) {
 };
 Data.findByTeacherId = function (teacher_id, result) {
   dbConn.query(
-    "Select * from teacher_facts where teacher_id = ? ",
+    "SELECT * FROM teacher_facts WHERE teacher_id = ? ",
     teacher_id,
     function (err, res) {
       if (err) {
@@ -67,7 +67,7 @@ Data.findByTeacherId = function (teacher_id, result) {
 };
 Data.findByUserId = function (user_id, result) {
   dbConn.query(
-    "Select * from teacher_facts where user_id = ? ",
+    "SELECT * FROM teacher_facts WHERE user_id = ? ",
     user_id,
     function (err, res) {
       if (err) {
@@ -80,7 +80,31 @@ Data.findByUserId = function (user_id, result) {
 };
 Data.findByUid = function (uid, result) {
   dbConn.query(
-    "Select * from teacher_facts where uid = ? ",
+    `SELECT
+      f.id AS fact_id,
+      f.uid,
+      f.ok AS fact_ok,
+      f.checked AS fact_checked,
+      f.table,
+      f.content,
+      f.edit_points,
+      f.date_add AS fact_date_add,
+      f.user_id,
+      u.nick,
+      f.teacher_id,
+      t.ok AS teacher_ok,
+      t.checked AS teacher_checked,
+      t.name_first,
+      t.name_last,
+      t.school_id,
+      s.name_full,
+      s.ok AS school_ok,
+      s.checked AS school_checked
+    FROM teacher_facts f 
+    JOIN teacher t ON t.id = f.teacher_id
+    JOIN users u ON u.id = f.user_id
+    JOIN school s ON t.school_id = s.id
+    WHERE f.uid = ?`,
     uid,
     function (err, res) {
       if (err) {

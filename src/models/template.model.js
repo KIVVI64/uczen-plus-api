@@ -15,7 +15,7 @@ var Data = function (data) {
   this.updated_at = new Date();
 };
 Data.create = function (newEmp, result) {
-  dbConn.query("INSERT INTO templates set ?", newEmp, function (err, res) {
+  dbConn.query("INSERT INTO templates SET ?", newEmp, function (err, res) {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -27,7 +27,7 @@ Data.create = function (newEmp, result) {
 };
 Data.findById = function (id, result) {
   dbConn.query(
-    "Select * from templates where id = ? ",
+    "SELECT * FROM templates WHERE id = ? ",
     id,
     function (err, res) {
       if (err) {
@@ -40,7 +40,7 @@ Data.findById = function (id, result) {
   );
 };
 Data.findAll = function (result) {
-  dbConn.query("Select * from templates", function (err, res) {
+  dbConn.query("SELECT id, date_add FROM templates", function (err, res) {
     if (err) {
       console.log("error: ", err);
       result(null, err);

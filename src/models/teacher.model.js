@@ -3,15 +3,15 @@ var dbConn = require("../../config/db.config");
 
 //Generowanie kodu
 function randomCode(length = 10) {
-    // Declare all characters
-    let chars = 'ABCDEFGHJKMNPQRSTUVWXYZ123456789';
+  // Declare all characters
+  let chars = "ABCDEFGHJKMNPQRSTUVWXYZ123456789";
 
-    // Pick characers randomly
-    let str = '';
-    for (let i = 0; i < length; i++) {
-        str += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    return str;
+  // Pick characers randomly
+  let str = "";
+  for (let i = 0; i < length; i++) {
+    str += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return str;
 }
 
 //Tworzenie obiektu nauczyciela
@@ -46,7 +46,20 @@ Data.findById = function (id, result) {
 };
 Data.findBySchoolId = function (school_id, result) {
   dbConn.query(
-    "SELECT * FROM teacher WHERE school_id = ? ",
+    `SELECT
+      t.id,
+      t.ok,
+      t.checked,
+      t.school_id,
+      t.name_first,
+      t.name_last,
+      t.date_add,
+      t.date_edit,
+      COUNT(CASE WHEN f.date_add >= DATE_SUB(CURRENT_TIMESTAMP, INTERVAL 14 DAY) THEN 1 END) AS new_info
+    FROM teacher t
+    INNER JOIN teacher_facts f ON t.id = f.teacher_id
+    WHERE t.school_id = ?
+    GROUP BY t.id`,
     school_id,
     function (err, res) {
       if (err) {
@@ -58,15 +71,28 @@ Data.findBySchoolId = function (school_id, result) {
   );
 };
 Data.findAll = function (result) {
-  dbConn.query("SELECT * FROM teacher", function (err, res) {
-    if (err) {
-      //console.log("error: ", err);
-      result(null, err);
-    } else {
-      //console.log('templates : ', res);
-      result(null, res);
+  dbConn.query(
+    `SELECT
+      t.id,
+      t.ok,
+      t.checked,
+      t.school_id,
+      t.name_first,
+      t.name_last,
+      COUNT(CASE WHEN f.date_add >= DATE_SUB(CURRENT_TIMESTAMP, INTERVAL 14 DAY) THEN 1 END) AS new_info
+    FROM teacher t
+    INNER JOIN teacher_facts f ON t.id = f.teacher_id
+    GROUP BY t.id`,
+    function (err, res) {
+      if (err) {
+        //console.log("error: ", err);
+        result(null, err);
+      } else {
+        //console.log('templates : ', res);
+        result(null, res);
+      }
     }
-  });
+  );
 };
 /*Data.update = function (id, data, result) {
   dbConn.query(
@@ -93,14 +119,18 @@ Data.findAll = function (result) {
   );
 };*/
 Data.delete = function (id, result) {
-  dbConn.query("UPDATE teacher SET ok=0, checked=1 WHERE id = ?", [id], function (err, res) {
-    if (err) {
-      //console.log("error: ", err);
-      result(null, err);
-    } else {
-      result(null, res);
+  dbConn.query(
+    "UPDATE teacher SET ok=0, checked=1 WHERE id = ?",
+    [id],
+    function (err, res) {
+      if (err) {
+        //console.log("error: ", err);
+        result(null, err);
+      } else {
+        result(null, res);
+      }
     }
-  });
+  );
 };
 
 module.exports = Data;

@@ -24,7 +24,7 @@ Data.create = function (newEmp, result) {
   });
 };
 Data.findById = function (id, result) {
-  dbConn.query("Select * from teacher_info where id = ? ", id, function (err, res) {
+  dbConn.query("SELECT * FROM teacher_info WHERE id = ? ", id, function (err, res) {
     if (err) {
       //console.log("error: ", err);
       result(err, null);
@@ -35,7 +35,7 @@ Data.findById = function (id, result) {
 };
 Data.findByTeacherId = function (teacher_id, result) {
   dbConn.query(
-    "Select * from teacher_info where teacher_id = ? ",
+    "SELECT * FROM teacher_info WHERE teacher_id = ? ",
     teacher_id,
     function (err, res) {
       if (err) {
@@ -48,7 +48,7 @@ Data.findByTeacherId = function (teacher_id, result) {
 };
 Data.findByUserId = function (user_id, result) {
   dbConn.query(
-    "Select * from teacher_info where user_id = ? ",
+    "SELECT * FROM teacher_info WHERE user_id = ? ",
     user_id,
     function (err, res) {
       if (err) {
@@ -59,8 +59,8 @@ Data.findByUserId = function (user_id, result) {
     }
   );
 };
-/*Data.findAll = function (result) {
-  dbConn.query("Select * from teacher", function (err, res) {
+Data.findAll = function (result) {
+  dbConn.query("SELECT count(*) AS count, ok, checked FROM teacher_info GROUP BY ok, checked", function (err, res) {
     if (err) {
       //console.log("error: ", err);
       result(null, err);
@@ -69,7 +69,7 @@ Data.findByUserId = function (user_id, result) {
       result(null, res);
     }
   });
-};*/
+};
 /*Data.update = function (id, data, result) {
   dbConn.query(
     "UPDATE templates SET checked=?, first_name=?,last_name=?,email=?,phone=?,organization=?,designation=?,salary=? WHERE id = ?",

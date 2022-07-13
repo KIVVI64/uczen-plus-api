@@ -15,7 +15,7 @@ var Data = function (data) {
   this.contact = data.contact;
 };
 Data.create = function (newEmp, result) {
-  dbConn.query("INSERT INTO school set ?", newEmp, function (err, res) {
+  dbConn.query("INSERT INTO school SET ?", newEmp, function (err, res) {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -26,7 +26,7 @@ Data.create = function (newEmp, result) {
   });
 };
 Data.findById = function (id, result) {
-  dbConn.query("Select * from school where id = ? ", id, function (err, res) {
+  dbConn.query("SELECT * FROM school WHERE id = ? ", id, function (err, res) {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -36,7 +36,7 @@ Data.findById = function (id, result) {
   });
 };
 Data.findAll = function (result) {
-  dbConn.query("Select * from school", function (err, res) {
+  dbConn.query("SELECT id, ok, checked, name_full, name_colloquial, woj, city, date_add, date_edit FROM school", function (err, res) {
     if (err) {
       console.log("error: ", err);
       result(null, err);
