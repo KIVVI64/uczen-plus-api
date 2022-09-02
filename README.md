@@ -90,6 +90,27 @@ To add teacher pass Object in params
 }
 ```
 
+## Teacher Info
+
+| Method | Endpoint | Params | Description |
+| :----- | :------- | :----- | :---------- |
+| GET | /teacher_info | /:id | Retrieve specific info |
+| GET | /teacher_info | /teacher/:teacher_id | Find all info by teacher id |
+| GET | /teacher_info | /user/:user_id | Find info added by user id |
+| POST | /teacher_info | / | Add new info to teacher |
+
+To add info pass Object in params
+```json
+{
+    "ok": <0/1>, // default: 0
+    "checked": <0/1>, //default: 0
+    "teacher_id": <number>,
+    "property": <string>,
+    "value": <string>,
+    "user_id": <number>
+}
+```
+
 ## Teacher Facts
 
 | Method | Endpoint | Params | Description |
@@ -113,23 +134,24 @@ To add fact pass Object in params
 }
 ```
 
-## Teacher Info
+## Teacher Comments
 
 | Method | Endpoint | Params | Description |
 | :----- | :------- | :----- | :---------- |
-| GET | /teacher_info | /:id | Retrieve specific info |
-| GET | /teacher_info | /teacher/:teacher_id | Find all info by teacher id |
-| GET | /teacher_info | /user/:user_id | Find info added by user id |
-| POST | /teacher_info | / | Add new info to teacher |
+| GET | /teacher_comment | /:id | Retrieve specific comment |
+| GET | /teacher_comment | /teacher/:teacher_id | Find comment by teacher id |
+| GET | /teacher_comment | /user/:user_id | Find comment by user id |
+| GET | /teacher_comment | /uid/:uid | Find comment history by uid |
+| POST | /teacher_comment | / | Add new comment to teacher |
 
-To add info pass Object in params
+To add comment pass Object in params
 ```json
 {
     "ok": <0/1>, // default: 0
     "checked": <0/1>, //default: 0
+    "uid": <string>, //default: generated
     "teacher_id": <number>,
-    "property": <string>,
-    "value": <string>,
+    "content": <string>,
     "user_id": <number>
 }
 ```
