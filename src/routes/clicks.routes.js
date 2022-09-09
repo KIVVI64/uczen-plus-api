@@ -3,7 +3,7 @@ const router = express.Router();
 const clicksController = require("../controllers/clicks.controller");
 
 // Retrieve all templates
-router.get("/", templateController.countAll);
+router.get("/", clicksController.countAll);
 
 // Create a new template
 router.post("/", clicksController.create);
@@ -18,6 +18,6 @@ router.get("/school/:school_id", clicksController.findBySchoolId);
 router.get("/user/:user_id", clicksController.findByUserId);
 
 // Delete a template with id
-router.delete("/:id", clicksController.delete);
+//router.delete("/:id", clicksController.delete);
 
 module.exports = router;
