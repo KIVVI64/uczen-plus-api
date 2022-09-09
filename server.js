@@ -36,6 +36,7 @@ app.get('/', (req, res) => {
 
 // Require API routes
 //const templateRoutes = require('./src/routes/template.routes')
+const clicksRoutes = require('./src/routes/clicks.routes')
 const teacherRoutes = require('./src/routes/teacher.routes')
 const teacherInfoRoutes = require('./src/routes/teacher-info.routes')
 const teacherFactsRoutes = require('./src/routes/teacher-facts.routes')
@@ -45,6 +46,7 @@ const schoolRoutes = require('./src/routes/school.routes')
 const userRoutes = require('./src/routes/user.routes')
 
 // using as middleware
+app.use('/uczen-plus-api/v1/clicks', clicksRoutes)
 app.use('/uczen-plus-api/v1/teacher', teacherRoutes)
 app.use('/uczen-plus-api/v1/teacher_info', teacherInfoRoutes)
 app.use('/uczen-plus-api/v1/teacher_facts', teacherFactsRoutes)

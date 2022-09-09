@@ -175,4 +175,23 @@ To add point pass Object in params
 }
 ```
 
+## CLicks
+
+| Method | Endpoint | Params | Description |
+| :----- | :------- | :----- | :---------- |
+| GET | /clicks | / | Retrieve clicks count |
+| GET | /clicks/teacher | /:teacher_id | Retrieve all clicks assign to teacher |
+| GET | /clicks/school | /:school_id | Retrieve all clicks assign to school |
+| GET | /clicks/user | /:user_id | Retrieve all clicks assign to user |
+| POST | /clicks | / | Create a new clicks record |
+
+To add point pass Object in params
+```json
+{
+    "teacher_id": <number>,
+    "school_id": <number>,
+    "user_id": <number>,
+}
+```
+
 When adding records API return id in "data".
