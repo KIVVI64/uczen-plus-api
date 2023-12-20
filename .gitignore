@@ -6,9 +6,6 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 
-# Database credential file
-config/credential.js
-
 # Package lock files
 package-lock.json
 
