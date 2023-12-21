@@ -45,6 +45,14 @@ exports.findBySchoolId = function(req, res) {
     });
 };
 
+exports.teacherSearch = function(req, res) {
+    Data.teacherSearch(req.params.searchQuery, function(err, data) {
+        if (err)
+        res.send(err);
+        res.json(data);
+    });
+};
+
 
 exports.update = function(req, res) {
     if(req.body.constructor === Object && Object.keys(req.body).length === 0){

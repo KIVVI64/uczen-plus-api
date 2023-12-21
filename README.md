@@ -76,6 +76,7 @@ To add/edit school pass Object in params
 | GET | /teacher | / | Retrieve all teachers  |
 | GET | /teacher | /:id | Retrieve selected teacher |
 | GET | /teacher | /school/:school_id | Find teacher by school id |
+| GET | /teacher | /search/:searchQuery | Find teachers where name or fact matches searchQuery |
 | POST | /teacher | / | Add new teacher |
 | DELETE | /teacher | /:id | Delete teacher account ;) |
 

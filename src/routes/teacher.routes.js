@@ -14,6 +14,9 @@ router.get('/:id', teacherController.findById);
 // Retrieve a basic info about teacher with id
 router.get('/school/:school_id', teacherController.findBySchoolId);
 
+// Retrive search result
+router.get('/search/:searchQuery', teacherController.teacherSearch);
+
 // Update a teacher with id
 //router.put('/:id', teacherController.update);
 

@@ -98,6 +98,30 @@ Data.findAll = function (result) {
     }
   );
 };
+Data.teacherSearch = function (searchQuery, result) {
+  dbConn.query(
+    `SELECT
+      t.id AS teacher_id,
+      t.name_first,
+      t.name_last,
+      f.content
+    FROM teacher t
+    LEFT JOIN teacher_facts f ON t.id = f.teacher_id
+    WHERE
+      (t.name_first LIKE ? OR
+      t.name_last LIKE ? OR
+      f.content LIKE ?)
+    GROUP BY t.id;`,
+    [`%${searchQuery}%`, `%${searchQuery}%`, `%${searchQuery}%`],
+    function (err, res) {
+      if (err) {
+        result(err, null);
+      } else {
+        result(null, res);
+      }
+    }
+  );
+};
 /*Data.update = function (id, data, result) {
   dbConn.query(
     "UPDATE templates SET checked=?, first_name=?,last_name=?,email=?,phone=?,organization=?,designation=?,salary=? WHERE id = ?",
