@@ -36,31 +36,47 @@ Data.findById = function (id, result) {
   });
 };
 Data.findAll = function (result) {
-  dbConn.query("SELECT id, ok, checked, name_full, name_colloquial, woj, city, date_add, date_edit FROM school", function (err, res) {
-    if (err) {
-      console.log("error: ", err);
-      result(null, err);
-    } else {
-      console.log("templates : ", res);
-      result(null, res);
+  dbConn.query(
+    `SELECT
+      s.id,
+      s.ok,
+      s.checked,
+      s.name_full,
+      s.name_colloquial,
+      s.woj,
+      s.city,
+      s.date_add,
+      s.date_edit,
+      COUNT(t.id) AS total_teachers
+    FROM school s
+    INNER JOIN teacher t ON s.id = t.school_id
+    GROUP BY s.id`,
+    function (err, res) {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+      } else {
+        console.log("templates : ", res);
+        result(null, res);
+      }
     }
-  });
+  );
 };
 Data.update = function (id, data, result) {
   dbConn.query(
     "UPDATE school SET ok=?, checked=?, name_full=?, name_colloquial=?, type=?, address=?, woj=?, city=?, website=?, contact=? WHERE id = ?",
     [
-        data.ok,
-        data.checked,
-        data.name_full,
-        data.name_colloquial,
-        data.type,
-        data.address,
-        data.woj,
-        data.city,
-        data.website,
-        data.contact,
-        id,
+      data.ok,
+      data.checked,
+      data.name_full,
+      data.name_colloquial,
+      data.type,
+      data.address,
+      data.woj,
+      data.city,
+      data.website,
+      data.contact,
+      id,
     ],
     function (err, res) {
       if (err) {
