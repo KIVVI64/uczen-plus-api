@@ -8,7 +8,7 @@ const app = express();
 // Add headers before the routes are defined
 app.use(function (req, res, next) {
   // Website you wish to allow to connect
-  const allowedOrigins = ["http://localhost:8080", "https://ibnp.soniw.pl"];
+  const allowedOrigins = ["http://localhost:8080", "http://localhost:3000", "https://nuxt-1st-project.soniw.pl"];
   const origin = req.headers.origin;
   if (allowedOrigins.includes(origin)) {
     res.setHeader("Access-Control-Allow-Origin", origin);
