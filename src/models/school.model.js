@@ -49,7 +49,7 @@ Data.findAll = function (result) {
       s.date_edit,
       COUNT(t.id) AS total_teachers
     FROM school s
-    INNER JOIN teacher t ON s.id = t.school_id
+    LEFT JOIN teacher t ON s.id = t.school_id
     GROUP BY s.id`,
     function (err, res) {
       if (err) {

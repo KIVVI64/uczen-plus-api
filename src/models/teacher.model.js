@@ -58,7 +58,7 @@ Data.findBySchoolId = function (school_id, result) {
       COUNT(f.id) AS total_info,
       COUNT(CASE WHEN f.date_add >= DATE_SUB(CURRENT_TIMESTAMP, INTERVAL 14 DAY) THEN 1 END) AS new_info
     FROM teacher t
-    INNER JOIN teacher_facts f ON t.id = f.teacher_id
+    LEFT JOIN teacher_facts f ON t.id = f.teacher_id
     WHERE t.school_id = ?
     GROUP BY t.id`,
     school_id,
@@ -84,8 +84,8 @@ Data.findAll = function (result) {
       COUNT(CASE WHEN c.date_add >= DATE_SUB(CURRENT_TIMESTAMP, INTERVAL 14 DAY) THEN 1 END) AS trending,
       COUNT(c.id) AS total_clicks
     FROM teacher t
-    INNER JOIN teacher_facts f ON t.id = f.teacher_id
-    INNER JOIN clicks c ON t.id = c.teacher_id
+    LEFT JOIN teacher_facts f ON t.id = f.teacher_id
+    LEFT JOIN clicks c ON t.id = c.teacher_id
     GROUP BY t.id`,
     function (err, res) {
       if (err) {
