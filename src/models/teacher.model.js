@@ -104,15 +104,27 @@ Data.teacherSearch = function (searchQuery, result) {
       t.id AS teacher_id,
       t.name_first,
       t.name_last,
-      f.content
-    FROM teacher t
+      s.name_colloquial,
+      f.content,
+      COUNT(c.id) AS clicks,
+      MATCH (t.name_first, t.name_last) AGAINST (? IN NATURAL LANGUAGE MODE) AS score_name,
+      MATCH (f.content) AGAINST (? IN NATURAL LANGUAGE MODE) AS score_fact
+    FROM teacher_test t
     LEFT JOIN teacher_facts f ON t.id = f.teacher_id
-    WHERE
-      (t.name_first LIKE ? OR
-      t.name_last LIKE ? OR
-      f.content LIKE ?)
-    GROUP BY t.id;`,
-    [`%${searchQuery}%`, `%${searchQuery}%`, `%${searchQuery}%`],
+    LEFT JOIN school s ON s.id = t.school_id
+    LEFT JOIN clicks c ON t.id = c.teacher_id
+    WHERE (
+      t.name_first LIKE ?
+      OR t.name_last LIKE ?
+      OR f.content LIKE ?
+      OR MATCH (t.name_first, t.name_last) AGAINST (? IN NATURAL LANGUAGE MODE)
+      OR MATCH (f.content) AGAINST (? IN NATURAL LANGUAGE MODE)
+    )
+    GROUP BY t.id
+    ORDER BY
+      score_fact DESC,
+      clicks DESC;`,
+    [searchQuery, searchQuery, `%${searchQuery}%`, `%${searchQuery}%`, `%${searchQuery}%`, searchQuery, searchQuery],
     function (err, res) {
       if (err) {
         result(err, null);
