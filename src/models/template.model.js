@@ -45,7 +45,7 @@ Data.findAll = function (result) {
       console.log("error: ", err);
       result(null, err);
     } else {
-      console.log("templates : ", res);
+      //console.log("templates : ", res);
       result(null, res);
     }
   });
